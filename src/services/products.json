@@ -1,0 +1,38 @@
+[
+    {
+    "id": 1,
+    "imageUrl": "",
+    "product": "Café americano",
+    "price": 5,
+    "category": "breakfast",
+    "type": "drink",
+    "creation_date": "21-05-2022"
+    },
+    {
+    "id": 2,
+    "imageUrl": "",
+    "product": "Café con leche",
+    "price": 7,
+    "category": "breakfast",
+    "type": "drink",
+    "creation_date": "21-05-2022"
+    },
+    {
+    "id": 3,
+    "imageUrl": "",
+    "product": "Sandwich de jamón y queso",
+    "price": 10,
+    "category": "breakfast",
+    "type": "food",
+    "creation_date": "21-05-2022"
+    },
+    {
+    "id": 4,
+    "imageUrl":  "",
+    "product": "Jugo de frutas natural",
+    "price": 7,
+    "category": "breakfast",
+    "type": "drink",
+    "creation_date": "21-05-2022"
+    }
+    ]
