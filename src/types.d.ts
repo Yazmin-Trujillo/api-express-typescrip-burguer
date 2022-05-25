@@ -1,13 +1,29 @@
 import { Category, Type } from './enum'
 
-export interface ProductEntry {
+export interface Product {
   id: number
   imageUrl: string
   product: string
   price: number
   category: Category
   type: Type
-  creation_date: string
+  createDate: string
 }
 
-export type NewProductEntry = Omit<ProductEntry, 'id'>
+export interface NewProduct {
+  imageUrl: string
+  product: string
+  price: number
+  category: Category
+  type: Type
+}
+
+// export type NewProduct = Omit<Product, 'id', 'createDate'>
+
+export interface ProductUpdate {
+  imageUrl: string | undefined
+  product: string | undefined
+  price: number | undefined
+  category: Category | undefined
+  type: Type | undefined
+}

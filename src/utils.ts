@@ -1,4 +1,4 @@
-import { NewProductEntry } from './types'
+import { NewProduct, ProductUpdate } from './types'
 import { Category, Type } from './enum'
 
 const parseImageUrl = (imageUrlFromRequest: any): string => {
@@ -36,13 +36,6 @@ const parseType = (typeFromRequest: any): Type => {
   return typeFromRequest
 }
 
-const parseCreationDate = (creationDateFromRequest: any): string => {
-  if (!isString(creationDateFromRequest)) {
-    throw new Error('Incorrect or missing Creation Date')
-  }
-  return creationDateFromRequest
-}
-
 const isCategory = (params: any): boolean => {
   return Object.values(Category).includes(params)
 }
@@ -60,16 +53,26 @@ const isNumber = (number: number): boolean => {
   return typeof number === 'number'
 }
 
-const toNewProductEntry = (object: any): NewProductEntry => {
-  const newEntry: NewProductEntry = {
+const toNewProductEntry = (object: any): NewProduct => {
+  const newEntry: NewProduct = {
     imageUrl: parseImageUrl(object.imageUrl),
     product: parseProduct(object.product),
     price: parsePrice(object.price),
     category: parseCategory(object.category),
-    type: parseType(object.type),
-    creation_date: parseCreationDate(object.creation_date)
+    type: parseType(object.type)
   }
   return newEntry
 }
 
 export default toNewProductEntry
+
+export const toProductUpdate = (object: any): ProductUpdate => {
+  const update: ProductUpdate = {
+    imageUrl: isString(object.imageUrl) ? parseImageUrl(object.imageUrl) : undefined,
+    product: isString(object.product) ? parseProduct(object.product) : undefined,
+    price: isNumber(object.price) ? parsePrice(object.price) : undefined,
+    category: isString(object.category) ? parseCategory(object.category) : undefined,
+    type: isString(object.type) ? parseType(object.type) : undefined
+  }
+  return update
+}
