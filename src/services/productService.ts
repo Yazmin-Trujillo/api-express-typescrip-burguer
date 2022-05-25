@@ -1,15 +1,9 @@
+import { productRepository } from '../repositores/inMemoryProductRepository'
 import { NewProduct, Product, ProductUpdate } from '../types'
-import productData from './products.json'
 
-const productsMap: Map<number, Product> = new Map()
-const initialProducts: Product[] = productData as Product[]
-initialProducts.forEach(p => productsMap.set(p.id, p))
+export const getProduct = (): Product[] => productRepository.readAll()
 
-export const getProduct = (): Product[] => Array.from(productsMap.values())
-
-export const findById = (id: number): Product | undefined => {
-  return productsMap.get(id)
-}
+export const findById = (id: number): Product | undefined => productRepository.read(id)
 
 export const addProduct = (newProduct: NewProduct): Product => {
   const id = Math.max(...getProduct().map(p => p.id)) + 1
@@ -20,8 +14,7 @@ export const addProduct = (newProduct: NewProduct): Product => {
     createDate
   }
 
-  productsMap.set(product.id, product)
-  return product
+  return productRepository.create(product)
 }
 
 export const updateProduct = (id: number, productUpdate: ProductUpdate): Product => {
@@ -36,14 +29,9 @@ export const updateProduct = (id: number, productUpdate: ProductUpdate): Product
   if (productUpdate.category !== undefined) existingProduct.category = productUpdate.category
   if (productUpdate.type !== undefined) existingProduct.type = productUpdate.type
 
-  productsMap.set(id, existingProduct) // not really required, but just to demostrate updating an element in a map
-
-  return existingProduct
+  return productRepository.update(existingProduct)
 }
 
 export const deleteProduct = (id: number): void => {
-  if (!productsMap.has(id)) {
-    throw new Error('product to delete does not exists')
-  }
-  productsMap.delete(id)
+  productRepository.delete(id)
 }
