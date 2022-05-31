@@ -22,14 +22,14 @@ const parsePrice = (priceFromRequest: any): number => {
   return priceFromRequest
 }
 
-const parseCategory = (categoryFromRequest: any): Category => {
+export const parseCategory = (categoryFromRequest: any): Category => {
   if (!isString(categoryFromRequest) || !isCategory(categoryFromRequest)) {
     throw new Error('Incorrect or missing Category')
   }
   return categoryFromRequest
 }
 
-const parseType = (typeFromRequest: any): Type => {
+export const parseType = (typeFromRequest: any): Type => {
   if (!isString(typeFromRequest) || !isType(typeFromRequest)) {
     throw new Error('Incorrect or missing Type')
   }
