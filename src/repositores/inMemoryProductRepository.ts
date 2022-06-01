@@ -1,8 +1,21 @@
 import { Product } from '../types'
+import { parseCategory, parseType } from '../utils'
 import productData from './products.json'
 
 const db: Map<number, Product> = new Map()
-const initialProducts: Product[] = productData as Product[]
+const initialProducts: Product[] = productData.map((p) => {
+  const product: Product = {
+    id: p.id,
+    imageUrl: p.imageUrl,
+    name: p.product,
+    price: p.price,
+    category: parseCategory(p.category),
+    type: parseType(p.type),
+    createDate: new Date(p.createDate)
+  }
+  return product
+})
+
 initialProducts.forEach(p => db.set(p.id, p))
 
 export const productRepository = {

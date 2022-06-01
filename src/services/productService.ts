@@ -7,7 +7,7 @@ export const findById = (id: number): Product | undefined => productRepository.r
 
 export const addProduct = (newProduct: NewProduct): Product => {
   const id = Math.max(...getProduct().map(p => p.id)) + 1
-  const createDate = new Date().toISOString()
+  const createDate = new Date()
   const product: Product = {
     id,
     ...newProduct,
@@ -24,7 +24,7 @@ export const updateProduct = (id: number, productUpdate: ProductUpdate): Product
   }
 
   if (productUpdate.imageUrl !== undefined) existingProduct.imageUrl = productUpdate.imageUrl
-  if (productUpdate.product !== undefined) existingProduct.product = productUpdate.product
+  if (productUpdate.name !== undefined) existingProduct.name = productUpdate.name
   if (productUpdate.price !== undefined) existingProduct.price = productUpdate.price
   if (productUpdate.category !== undefined) existingProduct.category = productUpdate.category
   if (productUpdate.type !== undefined) existingProduct.type = productUpdate.type

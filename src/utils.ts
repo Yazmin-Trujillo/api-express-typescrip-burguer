@@ -56,7 +56,7 @@ const isNumber = (number: number): boolean => {
 const toNewProductEntry = (object: any): NewProduct => {
   const newEntry: NewProduct = {
     imageUrl: parseImageUrl(object.imageUrl),
-    product: parseProduct(object.product),
+    name: parseProduct(object.product),
     price: parsePrice(object.price),
     category: parseCategory(object.category),
     type: parseType(object.type)
@@ -69,7 +69,7 @@ export default toNewProductEntry
 export const toProductUpdate = (object: any): ProductUpdate => {
   const update: ProductUpdate = {
     imageUrl: isString(object.imageUrl) ? parseImageUrl(object.imageUrl) : undefined,
-    product: isString(object.product) ? parseProduct(object.product) : undefined,
+    name: isString(object.product) ? parseProduct(object.product) : undefined,
     price: isNumber(object.price) ? parsePrice(object.price) : undefined,
     category: isString(object.category) ? parseCategory(object.category) : undefined,
     type: isString(object.type) ? parseType(object.type) : undefined

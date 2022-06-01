@@ -3,16 +3,16 @@ import { Category, Type } from './enum'
 export interface Product {
   id: number
   imageUrl: string
-  product: string
+  name: string
   price: number
   category: Category
   type: Type
-  createDate: string
+  createDate: Date
 }
 
 export interface NewProduct {
   imageUrl: string
-  product: string
+  name: string
   price: number
   category: Category
   type: Type
@@ -22,7 +22,7 @@ export interface NewProduct {
 
 export interface ProductUpdate {
   imageUrl: string | undefined
-  product: string | undefined
+  name: string | undefined
   price: number | undefined
   category: Category | undefined
   type: Type | undefined

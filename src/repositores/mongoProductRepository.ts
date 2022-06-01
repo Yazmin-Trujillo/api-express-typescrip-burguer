@@ -33,11 +33,11 @@ export const productRepository = {
     const res = await MongoProductModel.create({
       _id: product.id,
       imageUrl: product.imageUrl,
-      name: product.product,
+      name: product.name,
       price: product.price,
       category: product.category.toString(),
       type: product.type.toString(),
-      createDate: new Date()
+      createDate: product.createDate
     })
 
     return toProduct(res)
@@ -65,10 +65,10 @@ const toProduct = (res: MongoProduct): Product => {
   return {
     id: res._id,
     imageUrl: res.imageUrl,
-    product: res.name,
+    name: res.name,
     price: res.price,
     category: parseCategory(res.category),
     type: parseType(res.type),
-    createDate: res.createDate.toISOString()
+    createDate: res.createDate
   }
 }
