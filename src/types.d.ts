@@ -21,9 +21,9 @@ export interface NewProduct {
 // export type NewProduct = Omit<Product, 'id', 'createDate'>
 
 export interface ProductUpdate {
-  imageUrl: string | undefined
-  name: string | undefined
-  price: number | undefined
-  category: Category | undefined
-  type: Type | undefined
+  imageUrl?: string
+  name?: string
+  price?: number
+  category?: Category
+  type?: Type
 }

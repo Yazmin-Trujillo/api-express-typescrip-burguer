@@ -1,12 +1,13 @@
-import { productRepository } from '../repositores/inMemoryProductRepository'
+import { productRepository } from '../repositores/mongoProductRepository'
 import { NewProduct, Product, ProductUpdate } from '../types'
 
-export const getProduct = (): Product[] => productRepository.readAll()
+export const getProducts = async (): Promise<Product[]> => await productRepository.readAll()
 
-export const findById = (id: number): Product | undefined => productRepository.read(id)
+export const findById = async (id: number): Promise < Product | undefined> => await productRepository.read(id)
 
-export const addProduct = (newProduct: NewProduct): Product => {
-  const id = Math.max(...getProduct().map(p => p.id)) + 1
+export const addProduct = async (newProduct: NewProduct): Promise<Product> => {
+  const products = await getProducts()
+  const id = Math.max(...products.map(p => p.id)) + 1
   const createDate = new Date()
   const product: Product = {
     id,
@@ -14,24 +15,22 @@ export const addProduct = (newProduct: NewProduct): Product => {
     createDate
   }
 
-  return productRepository.create(product)
+  return await productRepository.create(product)
 }
 
-export const updateProduct = (id: number, productUpdate: ProductUpdate): Product => {
-  const existingProduct = findById(id)
-  if (existingProduct === undefined) {
-    throw new Error('product to update does not exists')
-  }
+export const updateProduct = async (id: number, productUpdate: ProductUpdate): Promise<Product> => {
+//   const existingProduct = await findById(id)
+//   if (existingProduct === undefined) {
+//     throw new Error('product to update does not exists')
+//   }
 
-  if (productUpdate.imageUrl !== undefined) existingProduct.imageUrl = productUpdate.imageUrl
-  if (productUpdate.name !== undefined) existingProduct.name = productUpdate.name
-  if (productUpdate.price !== undefined) existingProduct.price = productUpdate.price
-  if (productUpdate.category !== undefined) existingProduct.category = productUpdate.category
-  if (productUpdate.type !== undefined) existingProduct.type = productUpdate.type
+  //   if (productUpdate.imageUrl !== undefined) existingProduct.imageUrl = productUpdate.imageUrl
+  //   if (productUpdate.name !== undefined) existingProduct.name = productUpdate.name
+  //   if (productUpdate.price !== undefined) existingProduct.price = productUpdate.price
+  //   if (productUpdate.category !== undefined) existingProduct.category = productUpdate.category
+  //   if (productUpdate.type !== undefined) existingProduct.type = productUpdate.type
 
-  return productRepository.update(existingProduct)
+  return await productRepository.updateSave(id, productUpdate)
 }
 
-export const deleteProduct = (id: number): void => {
-  productRepository.delete(id)
-}
+export const deleteProduct = async (id: number): Promise<void> => await productRepository.delete(id)
