@@ -8,9 +8,10 @@ const parseImageUrl = (imageUrlFromRequest: any): string => {
   return imageUrlFromRequest
 }
 
-const parseProduct = (productFromRequest: any): string => {
+const parseName = (productFromRequest: any): string => {
   if (!isString(productFromRequest)) {
-    throw new Error('Incorrect or missing Product')
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    throw new Error('Incorrect or missing Product, value=' + productFromRequest)
   }
   return productFromRequest
 }
@@ -31,7 +32,8 @@ export const parseCategory = (categoryFromRequest: any): Category => {
 
 export const parseType = (typeFromRequest: any): Type => {
   if (!isString(typeFromRequest) || !isType(typeFromRequest)) {
-    throw new Error('Incorrect or missing Type')
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    throw new Error('Incorrect or missing type=' + typeFromRequest)
   }
   return typeFromRequest
 }
@@ -56,7 +58,7 @@ const isNumber = (number: number): boolean => {
 const toNewProductEntry = (object: any): NewProduct => {
   const newEntry: NewProduct = {
     imageUrl: parseImageUrl(object.imageUrl),
-    name: parseProduct(object.product),
+    name: parseName(object.name),
     price: parsePrice(object.price),
     category: parseCategory(object.category),
     type: parseType(object.type)
@@ -69,7 +71,7 @@ export default toNewProductEntry
 export const toProductUpdate = (object: any): ProductUpdate => {
   const update: ProductUpdate = {
     imageUrl: isString(object.imageUrl) ? parseImageUrl(object.imageUrl) : undefined,
-    name: isString(object.product) ? parseProduct(object.product) : undefined,
+    name: isString(object.name) ? parseName(object.name) : undefined,
     price: isNumber(object.price) ? parsePrice(object.price) : undefined,
     category: isString(object.category) ? parseCategory(object.category) : undefined,
     type: isString(object.type) ? parseType(object.type) : undefined

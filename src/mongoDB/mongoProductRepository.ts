@@ -68,6 +68,7 @@ export const productRepository = {
 
   read: async (id: number): Promise<Product | undefined> => {
     const res = await MongoProductModel.findOne({ _id: id })
+
     if (res === null) {
       return undefined
     }
@@ -76,10 +77,14 @@ export const productRepository = {
   },
 
   readAll: async (): Promise<Product[]> => {
+    console.log('repository.readAll:entry')
     const res = await MongoProductModel.find({})
+    console.log('repository.readAll:entry', 1)
 
+    const products = res.map(mongoProduct => toProduct(mongoProduct))
+    console.log('repository.readAll:exit', products)
     // return res.map(toProduct)
-    return res.map(mongoProduct => toProduct(mongoProduct))
+    return products
   },
   // Método uno para actualizar
 

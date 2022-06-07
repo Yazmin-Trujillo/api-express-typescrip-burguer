@@ -1,5 +1,4 @@
-// import mongoose from 'mongoose'
-import mongoPassword from './repositores/password'
+import mongoPassword from '../mongoDB/password'
 import mongoose, { model, Model, Schema } from 'mongoose'
 
 const encodedPassword = encodeURIComponent(mongoPassword)

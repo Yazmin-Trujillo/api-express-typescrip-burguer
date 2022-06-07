@@ -1,4 +1,5 @@
 import express from 'express'
+import { openConnection } from './mongoDB/mongoConnection'
 import productRouter from './routes/products'
 
 const app = express()
@@ -13,6 +14,8 @@ app.get('/ping', (_req, res) => {
 
 app.use('/api/products', productRouter)
 
-app.listen(PORT, () => {
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+app.listen(PORT, async () => {
+  await openConnection()
   console.log(`Server running on port ${PORT}`)
 })

@@ -1,4 +1,4 @@
-import { productRepository } from '../repositores/mongoProductRepository'
+import { productRepository } from '../mongoDB/mongoProductRepository'
 import { NewProduct, Product, ProductUpdate } from '../types'
 
 export const getProducts = async (): Promise<Product[]> => await productRepository.readAll()

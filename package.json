@@ -20,13 +20,14 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "express": "4.18.1"
+    "express": "4.18.1",
+    "mongoose": "^6.3.5"
   },
   "eslintConfig": {
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "extends":[
+    "extends": [
       "./node_modules/ts-standard/eslintrc.json"
     ]
   }
